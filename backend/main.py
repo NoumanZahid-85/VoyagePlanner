@@ -1,10 +1,30 @@
 import os
+from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from alembic.config import Config
+from alembic import command
 
 from backend.routers import auth, trips, days, items, bookings
 
-app = FastAPI(title="Travel Planner API")
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    try:
+        alembic_cfg = Config(os.path.join(os.path.dirname(__file__), "alembic.ini"))
+        alembic_cfg.set_main_option("script_location", os.path.join(os.path.dirname(__file__), "alembic"))
+        db_url = os.environ.get("DATABASE_URL")
+        if db_url:
+            if db_url.startswith("postgres://"):
+                db_url = db_url.replace("postgres://", "postgresql://", 1)
+            alembic_cfg.set_main_option("sqlalchemy.url", db_url)
+        command.upgrade(alembic_cfg, "head")
+    except Exception as e:
+        print(f"[startup] Migration skipped: {e}")
+    yield
+
+
+app = FastAPI(title="Travel Planner API", lifespan=lifespan)
 
 origins = os.environ.get("CORS_ORIGINS", "http://localhost:5173").split(",")
 
