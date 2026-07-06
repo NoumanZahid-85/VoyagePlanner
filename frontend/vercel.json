@@ -1,0 +1,11 @@
+{
+  "rewrites": [
+    { "source": "/auth/(.*)", "destination": "https://travelplannerapi-4wm1.onrender.com/auth/$1" },
+    { "source": "/trips", "destination": "https://travelplannerapi-4wm1.onrender.com/trips" },
+    { "source": "/trips/(.*)", "destination": "https://travelplannerapi-4wm1.onrender.com/trips/$1" },
+    { "source": "/days/(.*)", "destination": "https://travelplannerapi-4wm1.onrender.com/days/$1" },
+    { "source": "/items/(.*)", "destination": "https://travelplannerapi-4wm1.onrender.com/items/$1" },
+    { "source": "/bookings/(.*)", "destination": "https://travelplannerapi-4wm1.onrender.com/bookings/$1" },
+    { "source": "/health", "destination": "https://travelplannerapi-4wm1.onrender.com/health" }
+  ]
+}
