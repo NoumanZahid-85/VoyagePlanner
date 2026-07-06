@@ -7,7 +7,7 @@ from backend.auth import get_current_user
 router = APIRouter(prefix="/trips", tags=["trips"])
 
 
-@router.get("/", response_model=list[schemas.TripOut])
+@router.get("", response_model=list[schemas.TripOut])
 def list_trips(
     db: Session = Depends(get_db),
     current_user: models.User = Depends(get_current_user),
@@ -21,7 +21,7 @@ def list_trips(
     return trips
 
 
-@router.post("/", response_model=schemas.TripOut, status_code=201)
+@router.post("", response_model=schemas.TripOut, status_code=201)
 def create_trip(
     body: schemas.TripIn,
     db: Session = Depends(get_db),
