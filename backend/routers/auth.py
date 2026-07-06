@@ -11,6 +11,7 @@ from backend.auth import (
     set_refresh_cookie,
     clear_refresh_cookie,
 )
+from backend.seed_data import seed_demo_data, DEMO_EMAIL
 
 router = APIRouter(prefix="/auth", tags=["auth"])
 
@@ -38,6 +39,8 @@ def login(body: schemas.LoginIn, response: Response, db: Session = Depends(get_d
     access_token = create_access_token(user.id)
     refresh_token = create_refresh_token(user.id)
     set_refresh_cookie(response, refresh_token)
+    if body.email == DEMO_EMAIL:
+        seed_demo_data(db, user.id)
     return {"access_token": access_token, "user": {"id": user.id, "email": user.email}}
 
 
