@@ -7,9 +7,11 @@ DEMO_EMAIL = "demo@travelplanner.app"
 
 
 def seed_demo_data(db: Session, user_id: int):
-    existing = db.query(models.Trip).filter(models.Trip.owner_id == user_id).first()
-    if existing:
-        return
+    # Clear existing trips for demo user (idempotent)
+    trips = db.query(models.Trip).filter(models.Trip.owner_id == user_id).all()
+    for trip in trips:
+        db.delete(trip)
+    db.flush()
 
     trips_data = [
         {
