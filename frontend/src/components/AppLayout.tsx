@@ -13,7 +13,7 @@ export function AppLayout() {
       <aside className="w-60 bg-sidebar border-r border-border flex flex-col">
         <div className="flex items-center gap-2 p-5 border-b border-border">
           <MapPin className="h-6 w-6 text-primary" />
-          <span className="font-semibold text-lg text-foreground">VoyagePlanner</span>
+          <span className="font-semibold text-lg text-white">VoyagePlanner</span>
         </div>
         <nav className="flex-1 p-3 space-y-1">
           <NavLink to="/trips" className={({ isActive }) => `flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-colors ${isActive ? "bg-primary/10 text-primary font-medium" : "text-muted-foreground hover:text-foreground hover:bg-accent/10"}`}>

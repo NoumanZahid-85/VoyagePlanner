@@ -1,0 +1,4 @@
+PLAN.md
+*.tsbuildinfo
+.DS_Store
+*.log

@@ -1,6 +1,5 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@config "../tailwind.config.js";
 
 @layer base {
   :root {
@@ -55,4 +54,8 @@
   .glass { @apply bg-background/80 backdrop-blur-lg border border-border/50; }
   .card-hover { @apply transition-all duration-200 hover:scale-[1.02] hover:shadow-lg; }
   .shimmer-bg { background: linear-gradient(90deg, hsl(var(--muted)) 25%, hsl(var(--muted-foreground)/0.1) 50%, hsl(var(--muted)) 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite; }
+  .marker-ping { animation: marker-ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite; }
+}
+@keyframes marker-ping {
+  75%, 100% { transform: scale(2); opacity: 0; }
 }
